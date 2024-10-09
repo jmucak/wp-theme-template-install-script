@@ -22,6 +22,13 @@ const runSetup = (repoUrl, directory) => {
     // Change to the cloned directory
     shell.cd(targetDir);
 
+    console.log('Removing .git directory to remove git history...');
+    // Remove the .git directory to erase the git history
+    if (shell.rm('-rf', '.git').code !== 0) {
+        shell.echo('Error: Failed to remove .git directory');
+        shell.exit(1);
+    }
+
     console.log(`Setting new remote origin to ${repoUrl}...`);
 
     // Change to the cloned directory
