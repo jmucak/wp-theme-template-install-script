@@ -31,14 +31,12 @@ const runSetup = (repoUrl, directory) => {
 
     console.log(`Setting new remote origin to ${repoUrl}...`);
 
-    // Change to the cloned directory
-    shell.cd(targetDir);
-
-    // Remove the old origin and add the new one
-    if (shell.exec('git remote remove origin').code !== 0) {
-        shell.echo('Error: Failed to remove the old remote origin');
+    // Add the new Git remote
+    if (shell.exec(`git init`).code !== 0) {
+        shell.echo('Error: Git initialization failed');
         shell.exit(1);
     }
+
     if (shell.exec(`git remote add origin ${repoUrl}`).code !== 0) {
         shell.echo('Error: Failed to add the new remote origin');
         shell.exit(1);
@@ -67,7 +65,9 @@ const runSetup = (repoUrl, directory) => {
         }
     }
 
-    console.log(`Pushing changes to ${repoUrl}...`);
+    // Add all files, commit, and push
+    shell.exec('git add .');
+    shell.exec('git commit -m "Initial commit without history"');
 
     // Push the cloned repository to the new repository
     if (shell.exec('git push -u origin main').code !== 0) {
