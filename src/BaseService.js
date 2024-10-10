@@ -1,10 +1,13 @@
 import shell from 'shelljs';
+
 export default class BaseService {
     cloneRepository(repository, directory) {
         // Clone the repo
-        if (shell.exec(`git clone ${repository} ${directory}`).code !== 0) {
-            shell.echo('Error: Git clone failed');
-            shell.exit(1);
+        if (shell.exec(`git clone ${repository.ssh} ${directory}`).code !== 0) {
+            if (shell.exec(`git clone ${repository.https} ${directory}`).code !== 0) {
+                shell.echo('Error: Git clone failed');
+                shell.exit(1);
+            }
         }
 
         // Change to the cloned directory
@@ -76,9 +79,15 @@ export default class BaseService {
 
     getRepository(type) {
         if (type === "plugin") {
-            return "git@github.com:jmucak/wp-plugin-template.git";
+            return {
+                ssh: "git@github.com:jmucak/wp-plugin-template.git",
+                https: "https://github.com/jmucak/wp-plugin-template.git"
+            }
         }
 
-        return "git@github.com:jmucak/wp-theme-template.git";
+        return {
+            ssh: "git@github.com:jmucak/wp-theme-template.git",
+            https: "https://github.com/jmucak/wp-theme-template.git"
+        }
     }
 }
