@@ -35,14 +35,14 @@ export default class PluginService extends BaseService {
 
         this.processFiles(this.getFiles(process.cwd()));
 
-        // this.addNewGitRepository(this.repository);
-        //
-        // this.installDependencies();
-        //
-        // console.log("Deploy changes: " + this.deployChanges);
-        // if (this.deployChanges) {
-        //     this.pushInitialCommit();
-        // }
+        this.addNewGitRepository(this.repository);
+
+        this.installDependencies();
+
+        console.log("Deploy changes: " + this.deployChanges);
+        if (this.deployChanges) {
+            this.pushInitialCommit();
+        }
 
         console.log('Setup completed successfully!');
     }
