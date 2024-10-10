@@ -73,4 +73,12 @@ export default class BaseService {
             shell.exit(1);
         }
     }
+
+    getRepository(type) {
+        if (type === "plugin") {
+            return "git@github.com:jmucak/wp-plugin-template.git";
+        }
+
+        return "git@github.com:jmucak/wp-theme-template.git";
+    }
 }

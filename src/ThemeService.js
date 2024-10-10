@@ -1,22 +1,14 @@
 import BaseService from "./BaseService.js";
 import inquirer from "inquirer";
 
-export default class Service extends BaseService {
+export default class ThemeService extends BaseService {
     constructor() {
         super();
         this.repository = "";
         this.directory = "";
     }
 
-    getRepository(type) {
-        if (type === "plugin") {
-            return "git@github.com:jmucak/wp-plugin-template.git";
-        }
-
-        return "git@github.com:jmucak/wp-theme-template.git";
-    }
-
-    async run(type) {
+    async run() {
         await this.promptForDetails();
 
         if (!this.repository || !this.directory) {
@@ -24,7 +16,7 @@ export default class Service extends BaseService {
             process.exit(1);
         }
 
-        this.cloneRepository(this.getRepository(type), this.directory);
+        this.cloneRepository(this.getRepository("theme"), this.directory);
 
         this.removeGitRepositoryFile();
 
