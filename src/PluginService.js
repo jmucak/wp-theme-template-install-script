@@ -79,16 +79,22 @@ export default class PluginService extends BaseService {
     }
 
     modifyMainClassName(content) {
-        const placeholder = "class WPPluginTemplate";
+        const placeholder = "WPPluginTemplate";
 
         // Replace all instances of {{new-namespace}} with the new namespace
-        return content.replace(placeholder, "class " + this.formattedProjectName.className);
+        return content.replace(placeholder, this.formattedProjectName.className);
     }
 
     modifyPluginSlug(content) {
         const placeholder = "PLUGIN_URL";
 
         return content.replace(placeholder, this.formattedProjectName.fileName);
+    }
+
+    modifyPluginName(content) {
+        const placeholder = "WP Plugin Template";
+
+        return content.replace(placeholder, this.projectName);
     }
 
     modifyData(filePath, type) {
@@ -103,6 +109,9 @@ export default class PluginService extends BaseService {
                 break;
             case "modifyPluginSlug":
                 modifiedContent = this.modifyPluginSlug(fileContent);
+                break;
+            case "modifyPluginName":
+                modifiedContent = this.modifyPluginName(fileContent);
                 break;
         }
 
@@ -141,6 +150,9 @@ export default class PluginService extends BaseService {
                         console.error(`Error renaming file ${filePath}:`, err);
                     } else {
                         console.log(`File renamed: ${filePath} -> ${newFilePath}`);
+
+                        this.modifyData(newFilePath, "modifyMainClassName");
+                        this.modifyData(newFilePath, "modifyPluginName");
                     }
                 });
             }
