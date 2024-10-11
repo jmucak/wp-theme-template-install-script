@@ -55,10 +55,11 @@ export default class BaseService {
 
         // Run npm install if package.json exists
         if (shell.test('-f', 'package.json')) {
-            console.log('Running npm install...');
+            console.log('Running npm install --include dev...');
 
-            if (shell.exec('npm install').code !== 0) {
+            if (shell.exec('npm install --include dev').code !== 0) {
                 shell.echo('Error: npm install failed');
+                shell.exit(1);
             }
 
             console.log('Running npm build...');
