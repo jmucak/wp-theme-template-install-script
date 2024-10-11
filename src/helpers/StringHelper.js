@@ -6,11 +6,10 @@ export default class StringHelper {
         // Remove numbers from the project name
         const cleanedProjectName = this.removeNumbers(projectName);
 
-        const namespace = this.toCamelCase(cleanedProjectName, false);  // First letter lowercase
         const className = this.toCamelCase(cleanedProjectName, true);   // First letter uppercase
         const fileName = this.toKebabCase(cleanedProjectName);          // Kebab-case (dashes)
 
-        return {namespace, className, fileName};
+        return {className, fileName};
     }
 
     toCamelCase(string, capitalizedFirstLetter = false) {

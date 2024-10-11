@@ -10,7 +10,7 @@ export default class PluginService extends BaseService {
         this.repository = "";
         this.projectName = "";
         this.deployChanges = false;
-        this.formattedProjectName = {}; // namespace, className, fileName
+        this.formattedProjectName = {}; // className, fileName
     }
 
     async run() {
@@ -24,7 +24,7 @@ export default class PluginService extends BaseService {
         const stringHelper = new StringHelper();
         this.formattedProjectName = stringHelper.getFormattedProjectName(this.projectName);
 
-        if (!this.formattedProjectName.namespace || !this.formattedProjectName.className || !this.formattedProjectName.fileName) {
+        if (!this.formattedProjectName.className || !this.formattedProjectName.fileName) {
             console.error('Something went wrong with formatting project name, try different project name');
             process.exit(1);
         }
@@ -75,7 +75,7 @@ export default class PluginService extends BaseService {
         // Replace namespace
         const namespace = /WpPluginTemplate/g;  // Regex to match the placeholder wpPluginTemplate
 
-        return content.replace(namespace, this.formattedProjectName.namespace);
+        return content.replace(namespace, this.formattedProjectName.className);
     }
 
     modifyMainClassName(content) {
