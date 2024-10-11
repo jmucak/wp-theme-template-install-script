@@ -82,7 +82,7 @@ export default class PluginService extends BaseService {
         const placeholder = "WPPluginTemplate";
 
         // Replace all instances of {{new-namespace}} with the new namespace
-        return content.replace(placeholder, this.formattedProjectName.className);
+        return content.replaceAll(placeholder, this.formattedProjectName.className);
     }
 
     modifyPluginSlug(content) {
@@ -94,7 +94,7 @@ export default class PluginService extends BaseService {
     modifyPluginName(content) {
         const placeholder = "WP Plugin Template";
 
-        return content.replace(placeholder, this.projectName);
+        return content.replaceAll(placeholder, this.projectName);
     }
 
     modifyData(filePath, type) {
