@@ -73,7 +73,7 @@ export default class PluginService extends BaseService {
     // Modify the namespace in the content of the file
     modifyFileNamespace(content) {
         // Replace namespace
-        const namespace = /wpPluginTemplate/g;  // Regex to match the placeholder wpPluginTemplate
+        const namespace = /WpPluginTemplate/g;  // Regex to match the placeholder wpPluginTemplate
 
         return content.replace(namespace, this.formattedProjectName.namespace);
     }
@@ -97,6 +97,12 @@ export default class PluginService extends BaseService {
         return content.replaceAll(placeholder, this.projectName);
     }
 
+    modifyComposerName(content) {
+        const placeholder = "wsytes/wp-plugin-template";
+
+        return content.replace(placeholder, "wsytes/" + this.formattedProjectName.fileName);
+    }
+
     modifyData(filePath, type) {
         let fileContent = fs.readFileSync(filePath, 'utf-8');
         let modifiedContent = "";
@@ -112,6 +118,9 @@ export default class PluginService extends BaseService {
                 break;
             case "modifyPluginName":
                 modifiedContent = this.modifyPluginName(fileContent);
+                break;
+            case "modifyComposerName":
+                modifiedContent = this.modifyComposerName(fileContent);
                 break;
         }
 
@@ -160,6 +169,11 @@ export default class PluginService extends BaseService {
             // rename plugin slug
             if (filePath.includes("ConfigProvider")) {
                 this.modifyData(filePath, "modifyPluginSlug");
+            }
+
+            // rename composer name
+            if (filePath.includes("composer.json")) {
+                this.modifyData(filePath, "modifyComposerName");
             }
 
             console.log(`Processed file: ${filePath}`);
