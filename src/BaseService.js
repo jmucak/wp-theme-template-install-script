@@ -33,6 +33,10 @@ export default class BaseService {
             shell.exit(1);
         }
 
+        // Add all files, commit, and push
+        shell.exec('git add .');
+        shell.exec('git commit -m "Initial commit without history"');
+
         if (shell.exec(`git remote add origin ${repository}`).code !== 0) {
             shell.echo('Error: Failed to add the new remote origin');
             shell.exit(1);
@@ -52,9 +56,9 @@ export default class BaseService {
         // Run npm install if package.json exists
         if (shell.test('-f', 'package.json')) {
             console.log('Running npm install...');
+
             if (shell.exec('npm install').code !== 0) {
                 shell.echo('Error: npm install failed');
-                shell.exit(1);
             }
 
             console.log('Running npm build...');
