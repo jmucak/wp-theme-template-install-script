@@ -9,7 +9,6 @@ export default class PluginService extends BaseService {
         super();
         this.repository = "";
         this.projectName = "";
-        this.deployChanges = false;
         this.formattedProjectName = {}; // className, fileName
     }
 
@@ -198,6 +197,6 @@ export default class PluginService extends BaseService {
         ]);
 
         this.repository = answers.repository;
-        this.deployChanges = answers.deployChanges;
+        this.projectName = answers.projectName;
     }
 }
