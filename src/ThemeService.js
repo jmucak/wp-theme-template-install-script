@@ -24,10 +24,10 @@ export default class ThemeService extends BaseService {
 
         this.installDependencies();
 
-        console.log("Deploy changes: " + this.deployChanges);
-        if (this.deployChanges) {
-            this.pushInitialCommit();
-        }
+        // console.log("Deploy changes: " + this.deployChanges);
+        // if (this.deployChanges) {
+        //     this.pushInitialCommit();
+        // }
 
         console.log('Setup completed successfully!');
     }
@@ -46,17 +46,10 @@ export default class ThemeService extends BaseService {
                 name: 'directory',
                 message: 'Enter the destination directory name:',
                 validate: (input) => (input ? true : 'Destination directory name is required'),
-            },
-            {
-                type: 'confirm',
-                name: 'deployChanges',
-                message: 'Push changes to git repository(y/n):',
-                default: true,
             }
         ]);
 
         this.repository = answers.repository;
         this.directory = answers.directory;
-        this.deployChanges = answers.deployChanges;
     }
 }

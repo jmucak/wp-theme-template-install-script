@@ -39,10 +39,10 @@ export default class PluginService extends BaseService {
 
         this.installDependencies();
 
-        console.log("Deploy changes: " + this.deployChanges);
-        if (this.deployChanges) {
-            this.pushInitialCommit();
-        }
+        // console.log("Deploy changes: " + this.deployChanges);
+        // if (this.deployChanges) {
+        //     this.pushInitialCommit();
+        // }
 
         console.log('Setup completed successfully!');
     }
@@ -194,17 +194,10 @@ export default class PluginService extends BaseService {
                 name: 'projectName',
                 message: 'Enter project name:',
                 validate: (input) => (input ? true : 'Project name is required'),
-            },
-            {
-                type: 'confirm',
-                name: 'deployChanges',
-                message: 'Push changes to git repository(y/n):',
-                default: true,
             }
         ]);
 
         this.repository = answers.repository;
         this.deployChanges = answers.deployChanges;
-        this.projectName = answers.projectName;
     }
 }

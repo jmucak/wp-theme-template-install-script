@@ -70,17 +70,17 @@ export default class BaseService {
         }
     }
 
-    pushInitialCommit() {
-        // Add all files, commit, and push
-        shell.exec('git add .');
-        shell.exec('git commit -m "Initial commit without history"');
-
-        // Push the cloned repository to the new repository
-        if (shell.exec('git push -u origin main').code !== 0) {
-            shell.echo('Error: Git push failed');
-            shell.exit(1);
-        }
-    }
+    // pushInitialCommit() {
+    //     // Add all files, commit, and push
+    //     shell.exec('git add .');
+    //     shell.exec('git commit -m "Initial commit without history"');
+    //
+    //     // Push the cloned repository to the new repository
+    //     if (shell.exec('git push -u origin main').code !== 0) {
+    //         shell.echo('Error: Git push failed');
+    //         shell.exit(1);
+    //     }
+    // }
 
     getRepository(type) {
         if (type === "plugin") {

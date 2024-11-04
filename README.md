@@ -18,7 +18,7 @@ Library for creating wsytes boilerplate for custom theme and plugin development
 
 - PHP > 8.1
 - composer v2
-- node v21
+- node v20
 - npm v10
 
 ### Installation <a id="installation"></a>

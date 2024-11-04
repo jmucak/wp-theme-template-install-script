@@ -39,6 +39,6 @@ export default class StringHelper {
     }
 
     removeNumbers(str) {
-        return str.replace(/[0-9]/g, '');  // Remove all digits from the string
+        return str.replace(/^\d+/, '');  // Remove all leading digits from the string
     }
 }
